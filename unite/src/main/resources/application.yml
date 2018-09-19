@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/unitedb
+    username: postgres
+    password: celokuhle
+    driver-class-name: org.postgresql.Driver
+  application:
+    name: unitenation
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+                hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+                hibernate.jdbc.lob.non_contextual_creation: true
+
+
+
