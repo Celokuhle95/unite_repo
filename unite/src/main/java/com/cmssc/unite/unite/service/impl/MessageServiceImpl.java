@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 @Service
 @Transactional
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageRepo repo;
@@ -20,7 +22,7 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public Message  get(Integer id) {
+    public Message get(Integer id) {
         return repo.findById(id).get();
     }
 
@@ -34,4 +36,8 @@ public class MessageServiceImpl implements MessageService{
         repo.delete(message);
     }
 
+    @Override
+    public Set<Message> findTop3ByFriendshipId(Integer friendshipId) {
+        return repo.findTop3ByFriendshipId(friendshipId);
+    }
 }

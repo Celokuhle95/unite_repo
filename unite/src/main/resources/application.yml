@@ -1,3 +1,6 @@
+server:
+  servlet:
+    contextPath: /unite
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/unitedb
@@ -10,8 +13,8 @@ spring:
     hibernate:
       ddl-auto: update
     properties:
-                hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-                hibernate.jdbc.lob.non_contextual_creation: true
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.jdbc.lob.non_contextual_creation: true
 
 
 

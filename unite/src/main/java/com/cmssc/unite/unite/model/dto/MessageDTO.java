@@ -1,26 +1,23 @@
-package com.cmssc.unite.unite.model;
+package com.cmssc.unite.unite.model.dto;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-public class Message {
+public class MessageDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
     private String value;
 
-    @Column
     private LocalDate date;
 
-    @Column
     private Integer senderId;
 
-    @ManyToOne
-    private Friendship friendship;
+    public MessageDTO(int id, String value, LocalDate date, Integer senderId) {
+        this.id = id;
+        this.value = value;
+        this.date = date;
+        this.senderId = senderId;
+    }
 
     public int getId() {
         return id;
@@ -53,13 +50,4 @@ public class Message {
     public void setSenderId(Integer senderId) {
         this.senderId = senderId;
     }
-
-    public Friendship getFriendship() {
-        return friendship;
-    }
-
-    public void setFriendship(Friendship friendship) {
-        this.friendship = friendship;
-    }
-
 }
