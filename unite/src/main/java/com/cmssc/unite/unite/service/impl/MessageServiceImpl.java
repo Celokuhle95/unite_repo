@@ -40,4 +40,9 @@ public class MessageServiceImpl implements MessageService {
     public Set<Message> findTop3ByFriendshipId(Integer friendshipId) {
         return repo.findTop3ByFriendshipId(friendshipId);
     }
+
+    @Override
+    public Set<Message> findAllAfterCertainMessage(Integer friendshipId, Integer messageId) {
+        return this.repo.findAllAfterCertainMessage(friendshipId, messageId);
+    }
 }

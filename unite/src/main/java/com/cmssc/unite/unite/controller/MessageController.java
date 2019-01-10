@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,9 +23,9 @@ public class MessageController {
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity<String> save(@RequestBody Message message) {
-        message.setDate(LocalDate.now());
+        message.setDate(LocalDateTime.now());
         service.save(message);
-        return new ResponseEntity<>("Message Created", HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
@@ -47,13 +48,21 @@ public class MessageController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/load/{friendshipId}", method = RequestMethod.GET)
-    public ResponseEntity<Set<MessageDTO>> findTop3ByFriendshipId(Integer friendshipId) {
-        Set<MessageDTO> messageDTOs = service.findTop3ByFriendshipId(friendshipId).stream().map((message) -> {
+    @RequestMapping(value = "/load/{friendshipId}/{messageId}", method = RequestMethod.GET)
+    public ResponseEntity<Set<MessageDTO>> findAllAfterCertainMessage(@PathVariable Integer friendshipId, @PathVariable Integer messageId) {
+        Set<MessageDTO> messageDTOs = service.findAllAfterCertainMessage(friendshipId, messageId).stream().map((Message message) -> {
             return new MessageDTO(message.getId(), message.getValue(), message.getDate(), message.getSenderId());
         }).collect(Collectors.toSet());
+        return new ResponseEntity(messageDTOs, HttpStatus.OK);
+    }
 
+    @RequestMapping(value = "/load/{friendshipId}", method = RequestMethod.GET)
+    public ResponseEntity<Set<MessageDTO>> findTop3ByFriendshipId(@PathVariable Integer friendshipId) {
+        Set<MessageDTO> messageDTOs = service.findTop3ByFriendshipId(friendshipId).stream().map(
+                (message) -> new MessageDTO(message.getId(), message.getValue(), message.getDate(), message.getSenderId())).collect(Collectors.toSet()
+        );
         return new ResponseEntity<>(messageDTOs, HttpStatus.OK);
     }
+
 
 }

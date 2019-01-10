@@ -1,6 +1,7 @@
 package com.cmssc.unite.unite.model.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MessageDTO {
 
@@ -8,11 +9,11 @@ public class MessageDTO {
 
     private String value;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
     private Integer senderId;
 
-    public MessageDTO(int id, String value, LocalDate date, Integer senderId) {
+    public MessageDTO(int id, String value, LocalDateTime date, Integer senderId) {
         this.id = id;
         this.value = value;
         this.date = date;
@@ -35,11 +36,11 @@ public class MessageDTO {
         this.value = value;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
